@@ -32,3 +32,13 @@ bin
 /Build/OpenGLDebug.log
 /Source/Native/*.log
 /Build/builder
+
+# .NET 8 / Avalonia build artifacts
+Source.CrossPlatform/**/bin/
+Source.CrossPlatform/**/obj/
+Tests/**/bin/
+Tests/**/obj/
+*.dll
+*.pdb
+*.cache
+
