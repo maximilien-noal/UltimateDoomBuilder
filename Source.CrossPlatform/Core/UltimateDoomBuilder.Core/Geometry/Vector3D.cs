@@ -356,7 +356,7 @@ namespace UltimateDoomBuilder.Core.Geometry
 		}
 
 		//mxd. Addeed to make compiler a bit more happy...
-		public override bool Equals(object obj) 
+		public override bool Equals(object? obj)
 		{
 			if(!(obj is Vector3D)) return false;
 

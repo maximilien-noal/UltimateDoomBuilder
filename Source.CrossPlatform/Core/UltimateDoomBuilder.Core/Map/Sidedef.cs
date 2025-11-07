@@ -144,7 +144,7 @@ namespace UltimateDoomBuilder.Core.Map
 		/// <summary>
 		/// Sets the high (upper) texture.
 		/// </summary>
-		public void SetTextureHigh(string texturename)
+		public void SetTextureHigh(string? texturename)
 		{
 			BeforeFieldsChange();
 			this.texnamehigh = texturename ?? "-";
@@ -153,7 +153,7 @@ namespace UltimateDoomBuilder.Core.Map
 		/// <summary>
 		/// Sets the middle texture.
 		/// </summary>
-		public void SetTextureMid(string texturename)
+		public void SetTextureMid(string? texturename)
 		{
 			BeforeFieldsChange();
 			this.texnamemid = texturename ?? "-";
@@ -162,7 +162,7 @@ namespace UltimateDoomBuilder.Core.Map
 		/// <summary>
 		/// Sets the low (lower) texture.
 		/// </summary>
-		public void SetTextureLow(string texturename)
+		public void SetTextureLow(string? texturename)
 		{
 			BeforeFieldsChange();
 			this.texnamelow = texturename ?? "-";

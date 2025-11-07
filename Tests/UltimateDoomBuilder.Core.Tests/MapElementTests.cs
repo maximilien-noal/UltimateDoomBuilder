@@ -161,8 +161,10 @@ public class MapElementTests
     {
         var sector = new Sector();
         
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type
         sector.FloorTexture = null;
         sector.CeilingTexture = null;
+#pragma warning restore CS8625
         
         Assert.Equal("-", sector.FloorTexture);
         Assert.Equal("-", sector.CeilingTexture);
