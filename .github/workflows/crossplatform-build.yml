@@ -1,0 +1,50 @@
+name: Cross-Platform Build
+
+on:
+  push:
+    branches: [ main, develop, 'copilot/**' ]
+    paths:
+      - 'Source.CrossPlatform/**'
+      - 'Tests/**'
+      - 'UltimateDoomBuilder.CrossPlatform.sln'
+      - '.github/workflows/crossplatform-build.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'Source.CrossPlatform/**'
+      - 'Tests/**'
+      - 'UltimateDoomBuilder.CrossPlatform.sln'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore UltimateDoomBuilder.CrossPlatform.sln
+    
+    - name: Build
+      run: dotnet build UltimateDoomBuilder.CrossPlatform.sln --no-restore --configuration Release
+    
+    - name: Test
+      run: dotnet test UltimateDoomBuilder.CrossPlatform.sln --no-build --configuration Release --verbosity normal
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: matrix.os == 'ubuntu-latest'
+      with:
+        name: avalonia-build-${{ matrix.os }}
+        path: |
+          Source.CrossPlatform/Core/UltimateDoomBuilder.Avalonia/bin/Release/net8.0/
+        retention-days: 7
