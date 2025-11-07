@@ -355,7 +355,7 @@ namespace UltimateDoomBuilder.Core.Geometry
 			return base.GetHashCode();
 		}
 
-		//mxd. Addeed to make compiler a bit more happy...
+		//mxd. Added to make compiler a bit more happy...
 		public override bool Equals(object? obj)
 		{
 			if(!(obj is Vector2D)) return false;
