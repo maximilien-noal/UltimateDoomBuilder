@@ -20,45 +20,27 @@ jobs:
           }
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore UltimateDoomBuilder.CrossPlatform.sln
 
     - name: Build
-      run: |
-        if [[ "${{ runner.os }}" == 'macOS' ]]; then
-          make mac
-        elif [[ "${{ runner.os }}" == 'Linux' ]]; then
-          sudo apt-get update
-          sudo apt install mesa-common-dev libxfixes-dev
-          make linux
-        fi
+      run: dotnet build UltimateDoomBuilder.CrossPlatform.sln --no-restore --configuration Release
 
-    - name: Test Files Presence
-      run: |
-        FILES=( \
-          Build/Builder.exe \
-          Build/libBuilderNative.so \
-          Build/Plugins/AutomapMode.dll \
-          Build/Plugins/BuilderEffects.dll \
-          Build/Plugins/BuilderModes.dll \
-          Build/Plugins/ColorPicker.dll \
-          Build/Plugins/CommentsPanel.dll \
-          Build/Plugins/NodesViewer.dll \
-          Build/Plugins/SoundPropagationMode.dll \
-          Build/Plugins/StairSectorBuilder.dll \
-          Build/Plugins/TagExplorer.dll \
-          Build/Plugins/TagRange.dll \
-          Build/Plugins/ThreeDFloorMode.dll \
-          Build/Plugins/VisplaneExplorer.dll \
-        )
-        for filename in "${FILES[@]}"; do
-          if [ ! -f $filename ]; then
-           echo "ERROR: File $filename is missing"
-           exit 1
-          fi
-        done
+    - name: Test
+      run: dotnet test UltimateDoomBuilder.CrossPlatform.sln --no-build --configuration Release --verbosity normal
 
-#    - name: Upload Package
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: "UDB_${{ matrix.config.name }}"
-#        path: Build
+    - name: Upload build artifacts
+      if: matrix.config.name == 'Linux'
+      uses: actions/upload-artifact@v4
+      with:
+        name: "avalonia-build-${{ matrix.config.name }}"
+        path: |
+          Source.CrossPlatform/Core/UltimateDoomBuilder.Avalonia/bin/Release/net8.0/
+        retention-days: 7
