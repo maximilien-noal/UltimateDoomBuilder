@@ -64,7 +64,7 @@ jobs:
         Remove-Item Build\Setup -recurse
 
     - name: Upload Package
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
-        path: Build
         name: "vs_${{ matrix.platform }}_${{ matrix.configuration }}"
+        path: Build
