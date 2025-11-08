@@ -61,7 +61,7 @@ jobs:
     - name: Prepare Package
       run: |
         # Delete unwanted files
-        Remove-Item Build\Setup -recurse
+        Remove-Item Build\Setup -recurse -ErrorAction SilentlyContinue
 
     - name: Upload Package
       uses: actions/upload-artifact@v4
