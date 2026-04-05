@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/Source/" />
+  <Folder Name="/Source/Core/">
+    <Project Path="Source/Core/Builder.csproj" />
+  </Folder>
+  <Folder Name="/Source/Plugins/">
+    <Project Path="Source/Plugins/AutomapMode/AutomapMode.csproj" />
+    <Project Path="Source/Plugins/BlockmapExplorer/BlockmapExplorer.csproj" />
+    <Project Path="Source/Plugins/BuilderEffects/BuilderEffects.csproj" />
+    <Project Path="Source/Plugins/BuilderModes/BuilderModes.csproj" />
+    <Project Path="Source/Plugins/ColorPicker/ColorPicker.csproj" />
+    <Project Path="Source/Plugins/CommentsPanel/CommentsPanel.csproj" />
+    <Project Path="Source/Plugins/ImageDrawingExample/ImageDrawingExample.csproj" />
+    <Project Path="Source/Plugins/NodesViewer/NodesViewer.csproj" />
+    <Project Path="Source/Plugins/StairSectorBuilder/StairSectorBuilder.csproj" />
+    <Project Path="Source/Plugins/TagExplorer/TagExplorer.csproj" />
+    <Project Path="Source/Plugins/TagRange/TagRange.csproj" />
+    <Project Path="Source/Plugins/UDBScript/UDBScript.csproj" />
+    <Project Path="Source/Plugins/USDF/USDF.csproj" />
+    <Project Path="Source/Plugins/VisplaneExplorer/VisplaneExplorer.csproj" />
+    <Project Path="Source/Plugins/WadAuthorMode/WadAuthorMode.csproj" />
+  </Folder>
+  <Folder Name="/Source/Plugins/3DFloorMode/">
+    <Project Path="Source/Plugins/3DFloorMode/ThreeDFloorMode.csproj" />
+  </Folder>
+  <Folder Name="/Source/Plugins/SoundPropagationMode/">
+    <Project Path="Source/Plugins/SoundPropagationMode/SoundPropagation.csproj" />
+  </Folder>
+  <Folder Name="/Source/Tests/">
+    <Project Path="Source/Tests/Builder.Tests/Builder.Tests.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+</Solution>

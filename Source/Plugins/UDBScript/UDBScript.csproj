@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jint" />
-    <PackageReference Include="Esprima" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Actions.cfg" />
