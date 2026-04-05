@@ -4,6 +4,9 @@ obj
 bin
 /Build/Builder.xml
 /Build/Builder.exe
+/Build/Builder.dll
+/Build/Builder.deps.json
+/Build/Builder.runtimeconfig.json
 /Build/Refmanual.chm
 /.vs
 /Build/DevIL.dll
@@ -32,3 +35,10 @@ bin
 /Build/OpenGLDebug.log
 /Source/Native/*.log
 /Build/builder
+# .NET 10 SDK build outputs
+/Source/Build/
+/Build/*.dll
+/Build/*.pdb
+/Build/*.json
+build-native/
+Build.Avalonia/

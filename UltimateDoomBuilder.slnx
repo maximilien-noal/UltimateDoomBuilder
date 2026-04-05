@@ -27,8 +27,12 @@
     <Project Path="Source/Plugins/SoundPropagationMode/SoundPropagation.csproj" />
   </Folder>
   <Folder Name="/Source/Tests/">
+    <Project Path="Source/Tests/Builder.BDD/Builder.BDD.csproj" />
     <Project Path="Source/Tests/Builder.Tests/Builder.Tests.csproj">
       <Platform Project="x64" />
     </Project>
+  </Folder>
+  <Folder Name="/Source/UI.Avalonia/">
+    <Project Path="Source/UI.Avalonia/Builder.UI.Avalonia.csproj" />
   </Folder>
 </Solution>

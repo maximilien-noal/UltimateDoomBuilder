@@ -1,0 +1,101 @@
+name: Cross-Platform CI
+
+on:
+  push:
+    branches: [ master, 'feature/**', 'copilot/**' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            config: Release
+            platform: x64
+            build_winforms: true
+          - os: windows-latest
+            config: Debug
+            platform: x64
+            build_winforms: true
+          - os: ubuntu-latest
+            config: Release
+            platform: x64
+            build_winforms: false
+          - os: ubuntu-latest
+            config: Debug
+            platform: x64
+            build_winforms: false
+          - os: macos-latest
+            config: Release
+            platform: x64
+            build_winforms: false
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} / ${{ matrix.config }} / ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # === Native Library Build ===
+      - name: Install Linux Dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mesa-common-dev libxfixes-dev libx11-dev cmake
+
+      - name: Build Native Library (CMake)
+        run: |
+          cmake -B build-native -S Source/Native -DCMAKE_BUILD_TYPE=${{ matrix.config }}
+          cmake --build build-native --config ${{ matrix.config }}
+
+      # === .NET Build ===
+      - name: Restore NuGet Packages
+        run: dotnet restore UltimateDoomBuilder.slnx
+
+      - name: Build Core (All Platforms)
+        run: dotnet build Source/Core/Builder.csproj -c ${{ matrix.config }} --no-restore
+
+      - name: Build Avalonia UI (All Platforms)
+        run: dotnet build Source/UI.Avalonia/Builder.UI.Avalonia.csproj -c ${{ matrix.config }} --no-restore
+
+      - name: Build WinForms UI (Windows Only)
+        if: matrix.build_winforms
+        run: dotnet build UltimateDoomBuilder.slnx -c ${{ matrix.config }} --no-restore
+
+      # === Tests ===
+      - name: Run Unit Tests
+        if: matrix.build_winforms
+        run: dotnet test Source/Tests/Builder.Tests/Builder.Tests.csproj -c ${{ matrix.config }} --no-build
+
+      # === Artifacts ===
+      - name: Upload Build Artifacts
+        if: matrix.config == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}-${{ matrix.platform }}-${{ matrix.config }}
+          path: |
+            Build/
+            Build.Avalonia/
+          retention-days: 7
+
+  # Keep Flatpak build for Linux distribution
+  flatpak:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Flatpak
+        run: echo "Flatpak build will be updated to use .NET 10 runtime"
