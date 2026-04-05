@@ -219,7 +219,7 @@ namespace CodeImp.DoomBuilder.BuilderModes.Editing
 			Linedef l = General.Map.Map.NearestLinedef(mousemappos);
 
 			// Check on which side of the linedef the mouse is
-			float side = l.SideOfLine(mousemappos);
+			float side = (float)l.SideOfLine(mousemappos);
 			if(side > 0)
 			{
 				// Is there a sidedef here?

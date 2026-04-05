@@ -33,6 +33,8 @@
   <ItemGroup>
     <Compile Remove="Controls\ScintillaControl.cs" />
     <Compile Remove="Controls\ScintillaConstants.cs" />
+    <Compile Remove="Windows\FlatBrowserForm.cs" />
+    <Compile Remove="Windows\FlatBrowserForm.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

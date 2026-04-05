@@ -3,6 +3,7 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>CodeImp.DoomBuilder.Plugins.VisplaneExplorer</RootNamespace>
     <AssemblyName>VisplaneExplorer</AssemblyName>
     <OutputPath>..\..\Build\Plugins\</OutputPath>

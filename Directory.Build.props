@@ -6,5 +6,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <!-- Enable cross-compilation of Windows-targeting projects on Linux/macOS -->
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- Suppress WinForms property serialization warnings (WFO1000) that are new in .NET 10.
+         These require adding DesignerSerializationVisibility attributes to every public property
+         on UserControl subclasses. Will be addressed incrementally. -->
+    <NoWarn>$(NoWarn);WFO1000</NoWarn>
   </PropertyGroup>
 </Project>

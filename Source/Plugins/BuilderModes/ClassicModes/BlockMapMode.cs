@@ -186,7 +186,7 @@ namespace CodeImp.DoomBuilder.BuilderModes
 				{
 					Vector2D v1 = new Vector2D(blockmap.Range.X + (float)hx * blockmap.BlockSize, blockmap.Range.Y + (float)hy * blockmap.BlockSize);
 					Vector2D v2 = new Vector2D(blockmap.Range.X + (float)(hx + 1) * blockmap.BlockSize, blockmap.Range.Y + (float)(hy + 1) * blockmap.BlockSize);
-					renderer.RenderRectangle(new RectangleF(v1.x, v1.y, v2.x - v1.x, v2.y - v1.y), 2.0f, General.Colors.Highlight, true);
+					renderer.RenderRectangle(new RectangleF((float)v1.x, (float)v1.y, (float)(v2.x - v1.x), (float)(v2.y - v1.y)), 2.0f, General.Colors.Highlight, true);
 				}
 
 				renderer.Finish();
@@ -205,8 +205,8 @@ namespace CodeImp.DoomBuilder.BuilderModes
 			hy = -1;
 			
 			// Determine highlighted block
-			float nhx = (mousemappos.x - blockmap.Range.Left) / (float)blockmap.BlockSize;
-			float nhy = (mousemappos.y - blockmap.Range.Top) / (float)blockmap.BlockSize;
+			float nhx = (float)((mousemappos.x - blockmap.Range.Left) / (float)blockmap.BlockSize);
+			float nhy = (float)((mousemappos.y - blockmap.Range.Top) / (float)blockmap.BlockSize);
 			if((nhx < (float)blockmap.Size.Width) && (nhy < (float)blockmap.Size.Height) && (nhx >= 0.0f) && (nhy >= 0.0f))
 			{
 				newhighlight = blockmap.GetBlockAt(mousemappos);
